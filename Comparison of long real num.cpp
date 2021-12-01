@@ -40,7 +40,7 @@
 #include <string>
 using namespace std;
 
-int CompReal() {
+bool CompReal(string input) {
     
     int dot_count = 0;
     bool digit_found = false;
@@ -53,7 +53,7 @@ int CompReal() {
         }
         else if (ch == '.') {
             if (++dot_count > 1) {
-                cout << "Incorrect number of dot\n";
+                //cout << "Incorrect number of dot\n";
                 return 1;
             }
             else {
@@ -64,24 +64,87 @@ int CompReal() {
             continue;
         }
 
-        cout << "Incorrect symbol " << ch << '\n';
+        //cout << "Incorrect symbol " << ch << '\n';
         return 1;
 
     }
     if (!digit_found) {
-        cout << "There is no digit in number\n";
+        //cout << "There is no digit in number\n";
         return 1;
     }
 
-    cout << "Number is correct";
+    //cout << "Number is correct";
     return 0;
+}
+
+string CompareNum (string Num1, string Num2)
+{
+    int nNum1Dot = 0, nNum2Dot = 0;
+
+    // variable for separate numbers
+    string szNum1Parth1, szNum1Parth2, szNum2Parth1, szNum2Parth2;
+    
+    //separate Num1 to 2 parth
+    for (int n = 0; n < Num1.length(); n++) {
+            if (Num1[n] == '.') {
+                    continue;
+                }
+                else {
+                szNum1Parth1 += Num1[n];
+                nNum1Dot++;
+                }
+            }
+    for (int n = nNum1Dot, i = 0; n < Num1.length(); n++, i++) {
+                szNum1Parth2 += Num1[n];
+        }
+    
+    //separate Num2 to 2 parth
+    for (int n = 0; n < Num2.length(); n++) {
+        if (Num2[n] == '.') {
+            continue;
+        }
+        else {
+            szNum2Parth1 += Num2[n];
+            nNum2Dot++;
+        }
+    }
+    for (int n = nNum2Dot, i = 0; n < Num2.length(); n++, i++) {
+        szNum2Parth2 += Num2[n];
+    }
+    
+    //compare two number
+
+    if (szNum1Parth1 > szNum2Parth1) {
+        return "More";
+    }
+    else if (szNum1Parth1 < szNum2Parth1) {
+        return "Less";
+    }
+    else if (szNum1Parth1 == szNum2Parth1) {
+        if (szNum1Parth2 > szNum2Parth2) {
+            return "More";
+        } else if (szNum1Parth2 < szNum2Parth2) {
+            return "Less";
+        } else {
+            return "Equal";
+        }
+    }
+    
 }
 
 int main()
 {
-    string input;
-    cin >> input;
-    cout << "Hello World!\n";
+    for (;;) {
+        string szInputNum1, szInputNum2;
+        cout << "input num1 num2 : ";
+        cin >> szInputNum1 >> szInputNum2;
+        if (CompReal(szInputNum1) || CompReal(szInputNum2)) {
+            cout << "incorrect number" << endl;
+        }
+        else {
+            cout << CompareNum(szInputNum1, szInputNum2) << endl;
+        }
+    }
 }
 
 
