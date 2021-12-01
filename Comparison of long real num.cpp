@@ -111,19 +111,26 @@ string CompareNum (string Num1, string Num2)
     for (int n = nNum2Dot, i = 0; n < Num2.length(); n++, i++) {
         szNum2Parth2 += Num2[n];
     }
+    // !!! Убрать ноли после значащего числа в части 2
+    
+    //convert string to integer
+    int nNum1Parth1 = stoi(szNum1Parth1);
+    int nNum1Parth2 = stoi(szNum1Parth2);
+    int nNum2Parth1 = stoi(szNum2Parth1);
+    int nNum2Parth2 = stoi(szNum2Parth2);
     
     //compare two number
 
-    if (szNum1Parth1 > szNum2Parth1) {
+    if (nNum1Parth1 > nNum2Parth1) {
         return "More";
     }
-    else if (szNum1Parth1 < szNum2Parth1) {
+    else if (nNum1Parth1 < nNum2Parth1) {
         return "Less";
     }
-    else if (szNum1Parth1 == szNum2Parth1) {
-        if (szNum1Parth2 > szNum2Parth2) {
+    else if (nNum1Parth1 == nNum2Parth1) {
+        if (nNum1Parth2 > nNum2Parth2) {
             return "More";
-        } else if (szNum1Parth2 < szNum2Parth2) {
+        } else if (nNum1Parth2 < nNum2Parth2) {
             return "Less";
         } else {
             return "Equal";
