@@ -82,12 +82,12 @@ string CompareNum (string Num1, string Num2)
     int nNum1Dot = 0, nNum2Dot = 0;
 
     // variable for separate numbers
-    string szNum1Parth1, szNum1Parth2, szNum2Parth1, szNum2Parth2;
+    string szNum1Parth1, szNum1Parth2 = "0", szNum2Parth1, szNum2Parth2 = "0";
     
     //separate Num1 to 2 parth
     for (int n = 0; n < Num1.length(); n++) {
             if (Num1[n] == '.') {
-                    continue;
+                    break;
                 }
                 else {
                 szNum1Parth1 += Num1[n];
@@ -101,7 +101,7 @@ string CompareNum (string Num1, string Num2)
     //separate Num2 to 2 parth
     for (int n = 0; n < Num2.length(); n++) {
         if (Num2[n] == '.') {
-            continue;
+            break;
         }
         else {
             szNum2Parth1 += Num2[n];
@@ -111,13 +111,12 @@ string CompareNum (string Num1, string Num2)
     for (int n = nNum2Dot, i = 0; n < Num2.length(); n++, i++) {
         szNum2Parth2 += Num2[n];
     }
-    // !!! Убрать ноли после значащего числа в части 2
-    
-    //convert string to integer
+        
+    //convert string to integer and double
     int nNum1Parth1 = stoi(szNum1Parth1);
-    int nNum1Parth2 = stoi(szNum1Parth2);
+    double nNum1Parth2 = stod(szNum1Parth2);
     int nNum2Parth1 = stoi(szNum2Parth1);
-    int nNum2Parth2 = stoi(szNum2Parth2);
+    double nNum2Parth2 = stod(szNum2Parth2);
     
     //compare two number
 
