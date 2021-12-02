@@ -79,63 +79,59 @@ bool CompReal(string input) {
 
 string CompareNum (string Num1, string Num2)
 {
-    int nNum1Dot = 0, nNum2Dot = 0;
+    int nNum1Dot =0 , nNum2Dot = 0;
 
     // variable for separate numbers
-    string szNum1Parth1, szNum1Parth2, szNum2Parth1, szNum2Parth2;
+    string szNum1Parth1, szNum1Parth2 = "0", szNum2Parth1, szNum2Parth2 = "0";
     
     //separate Num1 to 2 parth
     for (int n = 0; n < Num1.length(); n++) {
             if (Num1[n] == '.') {
-                    continue;
+                nNum1Dot = n;
+                    break;
                 }
-                else {
-                szNum1Parth1 += Num1[n];
-                nNum1Dot++;
-                }
+                else szNum1Parth1 += Num1[n];
             }
-    for (int n = nNum1Dot, i = 0; n < Num1.length(); n++, i++) {
-                szNum1Parth2 += Num1[n];
+    if (nNum1Dot > 0) {
+        for (int n = nNum1Dot + 1, i = 0; n < Num1.length(); n++, i++) {
+            szNum1Parth2[i] = Num1[n];
         }
-    
+    }
     //separate Num2 to 2 parth
     for (int n = 0; n < Num2.length(); n++) {
         if (Num2[n] == '.') {
-            continue;
+            nNum2Dot = n;
+            break;
         }
-        else {
-            szNum2Parth1 += Num2[n];
-            nNum2Dot++;
+        else szNum2Parth1 += Num2[n];
+    }
+    if (nNum2Dot > 0) {
+        for (int n = nNum2Dot + 1, i = 0; n < Num2.length(); n++, i++) {
+            szNum2Parth2[i] = Num2[n];
         }
     }
-    for (int n = nNum2Dot, i = 0; n < Num2.length(); n++, i++) {
-        szNum2Parth2 += Num2[n];
-    }
-    // !!! Убрать ноли после значащего числа в части 2
-    
-    //convert string to integer
-    int nNum1Parth1 = stoi(szNum1Parth1);
-    int nNum1Parth2 = stoi(szNum1Parth2);
-    int nNum2Parth1 = stoi(szNum2Parth1);
-    int nNum2Parth2 = stoi(szNum2Parth2);
-    
     //compare two number
 
-    if (nNum1Parth1 > nNum2Parth1) {
-        return "More";
-    }
-    else if (nNum1Parth1 < nNum2Parth1) {
-        return "Less";
-    }
-    else if (nNum1Parth1 == nNum2Parth1) {
-        if (nNum1Parth2 > nNum2Parth2) {
-            return "More";
-        } else if (nNum1Parth2 < nNum2Parth2) {
-            return "Less";
-        } else {
+    if (szNum1Parth1 < szNum2Parth1) return "Less";
+    else if (szNum1Parth1 > szNum2Parth1) return "More";
+    else if (szNum1Parth1 == szNum2Parth1) {
+        if (szNum1Parth2.length() > 0 && szNum2Parth2.length() > 0) {
+                 
+            for (int n = 0, i, j; n >= szNum1Parth2.length() && n >= szNum2Parth2.length(); n++) {
+                if (n >= szNum1Parth2.length()) i = szNum1Parth2.length() - 1;
+                else i = n;
+                if (n >= szNum2Parth2.length()) j = szNum2Parth2.length() - 1;
+                else j = n;
+
+
+                if (szNum1Parth2[i] > szNum2Parth2[j])      return "More";
+                else if (szNum1Parth2[i] < szNum2Parth2[j]) return "Less";
+            }
             return "Equal";
         }
-    }
+     }
+       
+
     
 }
 
