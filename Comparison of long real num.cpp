@@ -77,24 +77,24 @@ bool CompReal(string input) {
     return 0;
 }
 
-string CompareNum (string Num1, string Num2)
+string CompareNum(string Num1, string Num2)
 {
-    int nNum1Dot =0 , nNum2Dot = 0;
+    int nNum1Dot = 0, nNum2Dot = 0;
 
     // variable for separate numbers
-    string szNum1Parth1, szNum1Parth2 = "0", szNum2Parth1, szNum2Parth2 = "0";
-    
+    string szNum1Parth1, szNum1Parth2, szNum2Parth1, szNum2Parth2;
+
     //separate Num1 to 2 parth
     for (int n = 0; n < Num1.length(); n++) {
-            if (Num1[n] == '.') {
-                nNum1Dot = n;
-                    break;
-                }
-                else szNum1Parth1 += Num1[n];
-            }
+        if (Num1[n] == '.') {
+            nNum1Dot = n;
+            break;
+        }
+        else szNum1Parth1 += Num1[n];
+    }
     if (nNum1Dot > 0) {
         for (int n = nNum1Dot + 1, i = 0; n < Num1.length(); n++, i++) {
-            szNum1Parth2[i] = Num1[n];
+            szNum1Parth2 += Num1[n];
         }
     }
     //separate Num2 to 2 parth
@@ -107,7 +107,7 @@ string CompareNum (string Num1, string Num2)
     }
     if (nNum2Dot > 0) {
         for (int n = nNum2Dot + 1, i = 0; n < Num2.length(); n++, i++) {
-            szNum2Parth2[i] = Num2[n];
+            szNum2Parth2 += Num2[n];
         }
     }
     //compare two number
@@ -115,21 +115,21 @@ string CompareNum (string Num1, string Num2)
     if (szNum1Parth1 < szNum2Parth1) return "Less";
     else if (szNum1Parth1 > szNum2Parth1) return "More";
     else if (szNum1Parth1 == szNum2Parth1) {
-        if (szNum1Parth2.length() > 0 && szNum2Parth2.length() > 0) {
-                 
-            for (int n = 0, i, j; n >= szNum1Parth2.length() && n >= szNum2Parth2.length(); n++) {
-                if (n >= szNum1Parth2.length()) i = szNum1Parth2.length() - 1;
+        if (szNum1Parth2.length() > 0 || szNum2Parth2.length() > 0) {
+
+            for (int n = 0, i, j; n < szNum1Parth2.length() || n < szNum2Parth2.length(); n++) {
+                if (n >= szNum1Parth2.length()) i = 0;
                 else i = n;
-                if (n >= szNum2Parth2.length()) j = szNum2Parth2.length() - 1;
+                if (n >= szNum2Parth2.length()) j = 0;
                 else j = n;
 
 
                 if (szNum1Parth2[i] > szNum2Parth2[j])      return "More";
                 else if (szNum1Parth2[i] < szNum2Parth2[j]) return "Less";
-            }
-            return "Equal";
+            }  
         }
-     }
+        return "Equal";
+    }
        
 
     
