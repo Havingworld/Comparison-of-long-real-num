@@ -111,10 +111,42 @@ string CompareNum(string Num1, string Num2)
         }
     }
     //compare two number
-
-    if (szNum1Parth1 < szNum2Parth1) return "Less";
-    else if (szNum1Parth1 > szNum2Parth1) return "More";
-    else if (szNum1Parth1 == szNum2Parth1) {
+        //comparate parth 1
+            //longed of two numbers
+    string szLonger, szShorter;
+    if (szNum1Parth1.length() > szNum2Parth1.length()) {
+        szLonger = szNum1Parth1;
+        szShorter = szNum2Parth1;
+    }
+    else { 
+        szLonger = szNum2Parth1;
+        szShorter = szNum1Parth1;
+    }
+    //где значащая цифра?
+    //000001 1
+    string szAnswer = "Equal";
+    //проверить справа налево
+    for ( int n = 0, i = szLonger.length() - szShorter.length(), j = 0; n < szLonger.length(); n++, i--) {
+        if (i > 0 && szLonger[n] > '0') {
+            szAnswer = szLonger;
+            break;
+        }
+        else {
+            if (szLonger[n] > szShorter[j]) {
+                szAnswer = szLonger;
+                break;
+            }
+            else if (szLonger[n] < szShorter[j]) {
+                szAnswer = szShorter;
+                break;
+            }
+          j++;
+        }
+    }
+        //comparate parth 2
+    if (szAnswer == szNum2Parth1) return "Less";
+    else if (szAnswer == szNum1Parth1) return "More";
+    else if (szAnswer == "Equal") {
         if (szNum1Parth2.length() > 0 || szNum2Parth2.length() > 0) {
 
             for (int n = 0, i, j; n < szNum1Parth2.length() || n < szNum2Parth2.length(); n++) {
