@@ -131,7 +131,7 @@ string CompareNum(string Num1, string Num2)
             szAnswer = szLonger;
             break;
         }
-        else {
+        else if (i <= 0) {
             if (szLonger[n] > szShorter[j]) {
                 szAnswer = szLonger;
                 break;
@@ -148,16 +148,17 @@ string CompareNum(string Num1, string Num2)
     else if (szAnswer == szNum1Parth1) return "More";
     else if (szAnswer == "Equal") {
         if (szNum1Parth2.length() > 0 || szNum2Parth2.length() > 0) {
+            
+            for (int n = 0; n < szNum1Parth2.length() || n < szNum2Parth2.length(); n++) {
+                char i, j;
+                if (n >= szNum1Parth2.length()) i = '0';                                              
+                else i = szNum1Parth2[n];                                                             
+                if (n >= szNum2Parth2.length()) j = '0';                                              
+                else j = szNum2Parth2[n];                                                                         
+                
 
-            for (int n = 0, i, j; n < szNum1Parth2.length() || n < szNum2Parth2.length(); n++) {
-                if (n >= szNum1Parth2.length()) i = 0;
-                else i = n;
-                if (n >= szNum2Parth2.length()) j = 0;
-                else j = n;
-
-
-                if (szNum1Parth2[i] > szNum2Parth2[j])      return "More";
-                else if (szNum1Parth2[i] < szNum2Parth2[j]) return "Less";
+                if (i > j)      return "More";                          
+                else if (i < j) return "Less";                          
             }  
         }
         return "Equal";
